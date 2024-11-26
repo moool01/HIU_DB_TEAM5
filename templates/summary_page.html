@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="summary-container">
+    <h2>{{ lecture.title }} 강의 평가 요약</h2>
+
+    <!-- 평균 별점 -->
+    <div class="overall-rating">
+        <span>평균별점: {{ avg_rating }}</span>
+        <div class="star-rating-summary">
+            {% for i in range(1, 6) %}
+                <span class="stars">{% if i <= avg_rating %}★{% else %}☆{% endif %}</span>
+            {% endfor %}
+            <span class="review-count">({{ total_reviews }} 리뷰)</span>
+        </div>
+    </div>
+
+    <!-- 과제량 -->
+    <div class="statistic-bars">
+        <h3>과제량</h3>
+        <div class="stat-item">
+            <label>많음</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['assignment_amount']['많음'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['assignment_amount']['많음'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>보통</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['assignment_amount']['보통'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['assignment_amount']['보통'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>없음</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['assignment_amount']['없음'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['assignment_amount']['없음'] }}%</div>
+        </div>
+    </div>
+
+    <!-- 조모임 -->
+    <div class="statistic-bars">
+        <h3>조모임</h3>
+        <div class="stat-item">
+            <label>많음</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['group_work']['많음'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['group_work']['많음'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>보통</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['group_work']['보통'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['group_work']['보통'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>없음</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['group_work']['없음'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['group_work']['없음'] }}%</div>
+        </div>
+    </div>
+
+    <!-- 성적 -->
+    <div class="statistic-bars">
+        <h3>성적</h3>
+        <div class="stat-item">
+            <label>관대함</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['grade_fairness']['관대함'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['grade_fairness']['관대함'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>보통</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['grade_fairness']['보통'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['grade_fairness']['보통'] }}%</div>
+        </div>
+        <div class="stat-item">
+            <label>깐깐함</label>
+            <div class="bar">
+                <div class="progress" style="width: {{ percentages['grade_fairness']['깐깐함'] }}%;"></div>
+            </div>
+            <div class="percentage">{{ percentages['grade_fairness']['깐깐함'] }}%</div>
+        </div>
+    </div>
+
+    <!-- 출결 -->
+    <div class="details-list">
+        <h3>출결</h3>
+        <span>
+            {{ most_selected['attendance_type'] }} ✔ 
+            {% for key in percentages['attendance_type'].keys() %}
+                {% if key != most_selected['attendance_type'] %} | {{ key }} {% endif %}
+            {% endfor %}
+        </span>
+    </div>
+
+    <!-- 시험 횟수 -->
+    <div class="details-list">
+        <h3>시험 횟수</h3>
+        <span>
+            {{ most_selected['exam_count'] }} ✔ 
+            {% for key in percentages['exam_count'].keys() %}
+                {% if key != most_selected['exam_count'] %} | {{ key }} {% endif %}
+            {% endfor %}
+        </span>
+    </div>
+
+    <!-- 총평 -->
+    <div class="evaluation-reviews">
+        <h3>총평</h3>
+        <ul>
+            {% for evaluation in evaluations %}
+                <li>
+                    {{ evaluation.review }} ({{ evaluation.semester }})
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

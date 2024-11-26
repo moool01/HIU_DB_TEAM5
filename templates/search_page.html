@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="search-container">
+    <h2>검색 결과</h2>
+    <ul>
+        {% for result in results %}
+        <li>
+            <a href="{{ url_for('summary', lecture_id=result.lecture.id, professor_id=result.professor.id) }}">
+                <strong>{{ result.lecture.title }}</strong>
+                <em>({{ result.professor.name }})</em>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

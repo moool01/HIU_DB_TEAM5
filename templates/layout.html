@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ student.name if student else "강의 평가 시스템" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>{{ student.name }} 학생의 강의 평가 시스템</h1>
+            <form action="{{ url_for('search') }}" method="POST">
+                <input type="text" name="query" placeholder="강의명 또는 교수명 검색">
+                <button type="submit">검색</button>
+            </form>
+            <!-- 홈으로 돌아가기 버튼 추가 -->
+            <a href="{{ url_for('evaluate') }}">
+                <button type="button">홈으로 돌아가기</button>
+            </a>
+        </div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2024 강의 평가 시스템</p>
+    </footer>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

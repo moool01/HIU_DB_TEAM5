@@ -1,0 +1,396 @@
+/* 전체 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* 밝은 배경 */
+    color: #333; /* 기본 텍스트 색상 */
+    line-height: 1.6;
+}
+
+/* 폼 컨테이너 */
+.form-container {
+    background: #fff; /* 흰색 배경 */
+    padding: 2.5rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+/* 제목 스타일 */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 드롭다운 스타일 */
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9; /* 밝은 드롭다운 배경 */
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* 텍스트 입력 */
+textarea {
+    width: 100%;
+    height: 80px;
+    padding: 0.75rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #333;
+    font-size: 1rem;
+    resize: none;
+    margin-bottom: 1.5rem;
+}
+
+/* 평점 컨테이너 */
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* 별 컨테이너 */
+.stars {
+    display: flex;
+    flex-direction: row-reverse; /* 오른쪽에서 왼쪽으로 정렬 */
+    gap: 10px; /* 별 간격 */
+  }
+  /* 기본 별 스타일 (크기 증가) */
+.stars label {
+    font-size: 10rem; /* 이전 2.5rem에서 4rem으로 크기 증가 */
+    color: #ccc; /* 기본 회색 */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+  /* 라디오 버튼 숨기기 */
+  .stars input[type="radio"] {
+    display: none; /* 숨김 */
+  }
+  
+  /* 기본 별 스타일 (회색) */
+  .stars label {
+    font-size: 100px;
+    color: #ccc; /* 기본 회색 */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  /* 클릭된 별과 왼쪽 별 금색 */
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: #FFD700; /* 금색 */
+  }
+  
+  /* 점수 표시 */
+  .rating-value {
+    font-size: 30px;
+    margin-top: 20px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  
+  /* 반응형 */
+  @media (max-width: 768px) {
+    .stars label {
+      font-size: 60px;
+    }
+  }
+  
+
+/* 라벨 */
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333; /* 기본 텍스트 */
+}
+
+/* 가로 버튼 옵션 */
+/* 버튼 그룹 스타일 */
+.inline-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* 버튼 간격 조정 */
+    margin-bottom: 1.5rem;
+}
+
+.inline-options label {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* 라디오 버튼 숨기기 */
+.inline-options input[type="radio"] {
+    display: none;
+}
+
+/* 선택된 버튼 스타일 */
+.inline-options input[type="radio"]:checked + label {
+    background-color: #0078D4; /* 선택된 버튼 배경색 */
+    color: #fff; /* 선택된 버튼 텍스트 색 */
+    border-color: #0078D4; /* 선택된 버튼 테두리색 */
+}
+
+/* 제출 버튼 */
+/* 제출 버튼 스타일 */
+.btn-custom {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #0078D4 !important; /* 파란색 배경 */
+    color: white !important; /* 흰색 텍스트 */
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.btn-custom:hover {
+    background-color: #005BB5 !important; /* 더 어두운 파란색 */
+    transform: scale(1.05) !important; /* 약간 확대 */
+}
+
+
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+}
+/* 헤더 스타일 */
+header {
+    background-color: #0078D4; /* 밝은 파란색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    padding: 1.5rem 0; /* 수직 여백 추가 */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+    position: relative; /* 검색 폼 위치 조정 */
+}
+
+/* 헤더 제목 */
+.header-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 검색 폼 */
+.header-container form {
+    position: absolute;
+    top: 50%;
+    right: 2rem; /* 오른쪽 여백 */
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px; /* 검색 창과 버튼 간 간격 */
+}
+
+/* 검색 입력 */
+.header-container input {
+    width: 200px; /* 입력창 너비 축소 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* 내부 그림자 */
+    font-size: 0.9rem;
+}
+
+/* 검색 버튼 */
+.header-container button {
+    padding: 8px 12px; /* 버튼 패딩 축소 */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.header-container button:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Summary Container */
+.summary-container {
+    background-color: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Title and Overall Rating */
+.summary-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #005BB5;
+    margin-bottom: 15px;
+}
+
+.summary-container .overall-rating {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Star Rating Display */
+.star-rating-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star-rating-summary .stars {
+    font-size: 1.5rem;
+    color: #FFD700; /* Gold stars */
+}
+
+.star-rating-summary .review-count {
+    font-size: 1rem;
+    color: #777;
+    margin-left: 10px;
+}
+
+/* Bar Chart for Statistics */
+.statistic-bars {
+    margin-top: 20px;
+}
+
+.statistic-bars .stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.statistic-bars .stat-item label {
+    flex: 0 0 60px;
+    text-align: left;
+    font-size: 1rem;
+    color: #555;
+}
+
+.statistic-bars .stat-item .bar {
+    flex-grow: 1;
+    height: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    background-color: #EAEAEA; /* Base bar color */
+    overflow: hidden;
+    position: relative;
+}
+
+.statistic-bars .stat-item .bar .progress {
+    height: 100%;
+    border-radius: 10px;
+    background-color: #85C88A; /* Green for positive stats */
+    transition: width 0.3s ease-in-out;
+}
+
+.statistic-bars .stat-item .percentage {
+    flex: 0 0 40px;
+    text-align: right;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Details List for Additional Info */
+.details-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.details-list li {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.details-list li i {
+    font-size: 1.2rem;
+    color: #0078D4;
+}
+
+/* Empty Data Styling */
+.stat-item .bar .progress[data-value="0"] {
+    background-color: #EAEAEA; /* Light gray for 0% */
+}
+
+.stat-item .percentage[data-value="0"] {
+    color: #777; /* Muted text for 0% */
+}
+
+.rating-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.rating-options input[type="radio"] {
+    display: none;
+}
+.rating-options label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ccc;
+}
+.rating-options input[type="radio"]:checked + label {
+    color: #0078D4;
+}
+.rating-container .rating-value {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.alert.warning {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24;           /* Dark red text */
+    border: 1px solid #f5c6cb; /* Light red border */
+}
