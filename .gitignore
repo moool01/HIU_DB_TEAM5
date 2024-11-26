@@ -1,0 +1,4 @@
+# .gitignore 내용
+test.py
+__pycache__
+env.py

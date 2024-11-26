@@ -1,10 +1,9 @@
 from flask import Flask, flash, render_template, request, redirect, url_for,session
 from models import db, Student, Professor, Lecture, Evaluation, Summary,Professor_lecture
 from forms import EvaluationForm
-import cx_Oracle,sys
+import cx_Oracle,sys,os
+from env import DATABASE
 
-import sys
-import cx_Oracle
 
 # Oracle Instant Client 초기화
 if sys.platform == "darwin":  # macOS
@@ -29,7 +28,7 @@ else:
 
 # 이후 코드 작성
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'oracle+cx_oracle://DB501_PROJ_G5:1234@203.249.87.57:1521/orcl'
+app.config.from_object(DATABASE)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your_secret_key'
 

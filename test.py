@@ -1,8 +1,7 @@
 import cx_Oracle
-
-# Oracle Instant Client 초기화
+from env import DATABASE
 try:
-    cx_Oracle.init_oracle_client(lib_dir="C:\instantclient-basic-windows\instantclient_23_6")
+    cx_Oracle.init_oracle_client(lib_dir="/opt/oracle/instantclient_23_3")
     print("Oracle Instant Client 초기화 성공")
 except cx_Oracle.DatabaseError as e:
     print("Oracle Instant Client 초기화 실패:", e)
@@ -11,7 +10,7 @@ except cx_Oracle.DatabaseError as e:
 # SQLAlchemy를 이용한 DB 연결
 from sqlalchemy import create_engine
 
-engine = create_engine('oracle+cx_oracle://DB501_PROJ_G5:1234@203.249.87.57:1521/orcl')
+engine = create_engine(DATABASE.SQLALCHEMY_DATABASE_URI)
 
 try:
     with engine.connect() as connection:
