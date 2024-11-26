@@ -32,7 +32,7 @@ class Evaluation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     lecture_id = db.Column(db.String(30), db.ForeignKey('lecture.id'), nullable=False)
-    professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)  # 교수 연결
+    professor_id = db.Column(db.Integer, db.ForeignKey('professor.id'), nullable=False)
     rating = db.Column(db.Float, nullable=False)
     assignment_amount = db.Column(db.String(20), nullable=False)
     group_work = db.Column(db.String(20), nullable=False)
@@ -41,6 +41,10 @@ class Evaluation(db.Model):
     exam_count = db.Column(db.String(50), nullable=False)
     semester = db.Column(db.String(20), nullable=False)
     review = db.Column(db.Text, nullable=True)
+
+    # Add relationships
+    lecture = db.relationship('Lecture', backref='evaluations', lazy=True)
+    professor = db.relationship('Professor', backref='evaluations', lazy=True)
 
 class Summary(db.Model):
     __tablename__ = 'summary'  # 테이블 이름 명시

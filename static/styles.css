@@ -394,3 +394,103 @@ header {
     color: #721c24;           /* Dark red text */
     border: 1px solid #f5c6cb; /* Light red border */
 }
+
+/* 평가 리스트 컨테이너 */
+.evaluation-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 평가 항목 리스트 */
+.evaluation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.evaluation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.evaluation-details {
+    max-width: 70%;
+}
+
+.evaluation-details strong {
+    font-size: 1.2rem;
+    color: #0078D4;
+}
+
+.evaluation-details span {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* 버튼 스타일 */
+.evaluation-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit, .btn-delete, .btn-new {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #0078D4;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #005BB5;
+}
+
+.btn-delete {
+    background-color: #FF4D4F;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #D9363E;
+}
+
+.btn-new {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #28A745;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-new:hover {
+    background-color: #218838;
+}
+
+/* 삭제 폼 */
+.delete-form {
+    margin: 0;
+}

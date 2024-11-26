@@ -1,9 +1,8 @@
-from flask import Flask, flash, render_template, request, redirect, url_for,session
+from flask import Flask, flash, render_template, request, redirect, url_for,session, g
 from models import db, Student, Professor, Lecture, Evaluation, Summary,Professor_lecture
 from forms import EvaluationForm
-import cx_Oracle,sys,os
+import cx_Oracle,sys
 from env import DATABASE
-
 
 # Oracle Instant Client 초기화
 if sys.platform == "darwin":  # macOS
@@ -33,6 +32,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 db.init_app(app)
+
+@app.before_request
+def add_student_to_template():
+    student_id = session.get('student_id')
+    if student_id:
+        student = Student.query.get(student_id)
+        g.student = student  # g는 Flask의 전역 객체
+    else:
+        g.student = None
+
+
 @app.route('/')
 def home():
     return redirect(url_for('login'))
@@ -52,6 +62,62 @@ def login():
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login'))
+
+@app.route('/my_evaluations')
+def my_evaluations():
+    student_id = session.get('student_id')
+    if not student_id:
+        flash('로그인이 필요합니다.', 'danger')
+        return redirect(url_for('login'))
+
+    student = Student.query.get(student_id)  # 현재 로그인한 사용자 정보 가져오기
+    evaluations = Evaluation.query.filter_by(student_id=student_id).all()
+    return render_template('evaluation_list.html', evaluations=evaluations, student=student)
+
+@app.route('/edit/<int:evaluation_id>', methods=['GET', 'POST'])
+def edit_evaluation(evaluation_id):
+    student_id = session.get('student_id')
+    if not student_id:
+        flash('로그인이 필요합니다.', 'danger')
+        return redirect(url_for('login'))
+
+    evaluation = Evaluation.query.get_or_404(evaluation_id)
+    if evaluation.student_id != student_id:
+        flash('권한이 없습니다.', 'danger')
+        return redirect(url_for('my_evaluations'))
+
+    form = EvaluationForm(obj=evaluation)
+    if form.validate_on_submit():
+        evaluation.rating = form.rating.data
+        evaluation.assignment_amount = form.assignment_amount.data
+        evaluation.group_work = form.group_work.data
+        evaluation.grade_fairness = form.grade_fairness.data
+        evaluation.attendance_type = form.attendance_type.data
+        evaluation.exam_count = form.exam_count.data
+        evaluation.semester = form.semester.data
+        evaluation.review = form.review.data
+        db.session.commit()
+        flash('평가가 성공적으로 수정되었습니다.', 'success')
+        return redirect(url_for('my_evaluations'))
+
+    return render_template('evaluation_form.html', form=form, edit_mode=True)
+
+@app.route('/delete/<int:evaluation_id>', methods=['POST'])
+def delete_evaluation(evaluation_id):
+    student_id = session.get('student_id')
+    if not student_id:
+        flash('로그인이 필요합니다.', 'danger')
+        return redirect(url_for('login'))
+
+    evaluation = Evaluation.query.get_or_404(evaluation_id)
+    if evaluation.student_id != student_id:
+        flash('권한이 없습니다.', 'danger')
+        return redirect(url_for('my_evaluations'))
+
+    db.session.delete(evaluation)
+    db.session.commit()
+    flash('평가가 성공적으로 삭제되었습니다.', 'success')
+    return redirect(url_for('my_evaluations'))
 
 @app.route('/evaluate', methods=['GET', 'POST'])
 def evaluate():
@@ -116,6 +182,7 @@ def evaluate():
             return redirect(url_for('summary', lecture_id=lecture.id, professor_id=professor.id))
 
     # 기존 평가 존재 시, 동일 페이지로 유지
+    evaluations = Evaluation.query.filter_by(student_id=student_id).all()
     return render_template('evaluation_form.html', form=form, student=student)
 
 

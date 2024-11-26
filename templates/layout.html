@@ -9,17 +9,22 @@
 <body>
     <header>
         <div class="header-container">
-            <h1>{{ student.name }} 학생의 강의 평가 시스템</h1>
+            <h1>{{ g.student.name if g.student else "강의 평가 시스템" }} 학생의 강의 평가 시스템</h1>
             <form action="{{ url_for('search') }}" method="POST">
                 <input type="text" name="query" placeholder="강의명 또는 교수명 검색">
                 <button type="submit">검색</button>
             </form>
-            <!-- 홈으로 돌아가기 버튼 추가 -->
-            <a href="{{ url_for('evaluate') }}">
-                <button type="button">홈으로 돌아가기</button>
-            </a>
+            <div class="nav-buttons">
+                <a href="{{ url_for('evaluate') }}">
+                    <button type="button">홈으로 돌아가기</button>
+                </a>
+                <a href="{{ url_for('my_evaluations') }}">
+                    <button type="button">내 평가 보기</button>
+                </a>
+            </div>
         </div>
     </header>
+    
     <main>
         {% block content %}{% endblock %}
     </main>

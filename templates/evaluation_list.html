@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="evaluation-container">
+    <h2>내 강의 평가 목록</h2>
+
+    {% if evaluations %}
+        <ul class="evaluation-list">
+            {% for evaluation in evaluations %}
+            <li class="evaluation-item">
+                <div class="evaluation-details">
+                    <strong>{{ evaluation.lecture.title }}</strong> ({{ evaluation.professor.name }})<br>
+                    <span>평점: {{ evaluation.rating }} / 5</span><br>
+                    <span>총평: {{ evaluation.review }}</span>
+                </div>
+                <div class="evaluation-actions">
+                    <a href="{{ url_for('edit_evaluation', evaluation_id=evaluation.id) }}" class="btn-edit">수정</a>
+                    <form action="{{ url_for('delete_evaluation', evaluation_id=evaluation.id) }}" method="POST" class="delete-form">
+                        <button type="submit" class="btn-delete">삭제</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>작성된 강의 평가가 없습니다. 새 평가를 작성해보세요.</p>
+    {% endif %}
+
+    <a href="{{ url_for('evaluate') }}" class="btn-new">새 평가 작성</a>
+</div>
+{% endblock %}
