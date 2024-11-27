@@ -23,8 +23,8 @@
 2. Oracle Instant Client 설치:
     - macOS, Windows, 또는 Linux용 Instant Client를 설치하고 환경 변수를 설정합니다.
 
-3. `.env` 파일 생성:
-    - 아래 내용을 포함한 `.env` 파일을 생성합니다:
+3. `env.py` 파일 생성:
+    - 아래 내용을 포함한 `env.py` 파일을 생성합니다:
       ```
       DATABASE_URI=oracle+cx_oracle://<username>:<password>@<host>:<port>/<service>
       SECRET_KEY=your_secret_key
