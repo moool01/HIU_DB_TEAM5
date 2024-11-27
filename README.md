@@ -42,5 +42,8 @@
 ## 주요 엔드포인트
 
 - `/login` - 사용자 로그인
+![login](image1.png)
 - `/evaluate` - 강의 평가
+![evaluate](image2.png)
 - `/summary/<lecture_id>/<professor_id>` - 평가 요약
+![summary](image3.png)

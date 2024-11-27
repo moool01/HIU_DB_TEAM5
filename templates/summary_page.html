@@ -21,51 +21,64 @@
         <div class="stat-item">
             <label>많음</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['assignment_amount']['많음'] }}%;"></div>
+                <div class="progress" 
+                     data-type="많음" 
+                     style="width: {{ percentages['assignment_amount']['많음'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['assignment_amount']['많음'] }}%</div>
         </div>
         <div class="stat-item">
             <label>보통</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['assignment_amount']['보통'] }}%;"></div>
+                <div class="progress" 
+                     data-type="보통" 
+                     style="width: {{ percentages['assignment_amount']['보통'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['assignment_amount']['보통'] }}%</div>
         </div>
         <div class="stat-item">
             <label>없음</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['assignment_amount']['없음'] }}%;"></div>
+                <div class="progress" 
+                     data-type="없음" 
+                     style="width: {{ percentages['assignment_amount']['없음'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['assignment_amount']['없음'] }}%</div>
         </div>
+        
     </div>
 
     <!-- 조모임 -->
-    <div class="statistic-bars">
-        <h3>조모임</h3>
-        <div class="stat-item">
-            <label>많음</label>
-            <div class="bar">
-                <div class="progress" style="width: {{ percentages['group_work']['많음'] }}%;"></div>
-            </div>
-            <div class="percentage">{{ percentages['group_work']['많음'] }}%</div>
+<div class="statistic-bars">
+    <h3>조모임</h3>
+    <div class="stat-item">
+        <label>많음</label>
+        <div class="bar">
+            <div class="progress" 
+                 data-type="많음" 
+                 style="width: {{ percentages['group_work']['많음'] }}%;"></div>
         </div>
-        <div class="stat-item">
-            <label>보통</label>
-            <div class="bar">
-                <div class="progress" style="width: {{ percentages['group_work']['보통'] }}%;"></div>
-            </div>
-            <div class="percentage">{{ percentages['group_work']['보통'] }}%</div>
-        </div>
-        <div class="stat-item">
-            <label>없음</label>
-            <div class="bar">
-                <div class="progress" style="width: {{ percentages['group_work']['없음'] }}%;"></div>
-            </div>
-            <div class="percentage">{{ percentages['group_work']['없음'] }}%</div>
-        </div>
+        <div class="percentage">{{ percentages['group_work']['많음'] }}%</div>
     </div>
+    <div class="stat-item">
+        <label>보통</label>
+        <div class="bar">
+            <div class="progress" 
+                 data-type="보통" 
+                 style="width: {{ percentages['group_work']['보통'] }}%;"></div>
+        </div>
+        <div class="percentage">{{ percentages['group_work']['보통'] }}%</div>
+    </div>
+    <div class="stat-item">
+        <label>없음</label>
+        <div class="bar">
+            <div class="progress" 
+                 data-type="없음" 
+                 style="width: {{ percentages['group_work']['없음'] }}%;"></div>
+        </div>
+        <div class="percentage">{{ percentages['group_work']['없음'] }}%</div>
+    </div>
+</div>
 
     <!-- 성적 -->
     <div class="statistic-bars">
@@ -73,24 +86,31 @@
         <div class="stat-item">
             <label>관대함</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['grade_fairness']['관대함'] }}%;"></div>
+                <div class="progress" 
+                     data-type="관대함" 
+                     style="width: {{ percentages['grade_fairness']['관대함'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['grade_fairness']['관대함'] }}%</div>
         </div>
         <div class="stat-item">
             <label>보통</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['grade_fairness']['보통'] }}%;"></div>
+                <div class="progress" 
+                     data-type="보통" 
+                     style="width: {{ percentages['grade_fairness']['보통'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['grade_fairness']['보통'] }}%</div>
         </div>
         <div class="stat-item">
             <label>깐깐함</label>
             <div class="bar">
-                <div class="progress" style="width: {{ percentages['grade_fairness']['깐깐함'] }}%;"></div>
+                <div class="progress" 
+                     data-type="깐깐함" 
+                     style="width: {{ percentages['grade_fairness']['깐깐함'] }}%;"></div>
             </div>
             <div class="percentage">{{ percentages['grade_fairness']['깐깐함'] }}%</div>
         </div>
+        
     </div>
 
     <!-- 출결 -->
@@ -102,7 +122,7 @@
                 {% if key != most_selected['attendance_type'] %} | {{ key }} {% endif %}
             {% endfor %}
         </span>
-    </div>
+    </div>    
 
     <!-- 시험 횟수 -->
     <div class="details-list">
@@ -113,7 +133,7 @@
                 {% if key != most_selected['exam_count'] %} | {{ key }} {% endif %}
             {% endfor %}
         </span>
-    </div>
+    </div>    
 
     <!-- 총평 -->
     <div class="evaluation-reviews">
@@ -126,5 +146,6 @@
             {% endfor %}
         </ul>
     </div>
+    
 </div>
 {% endblock %}

@@ -52,13 +52,13 @@ h2 {
 }
 
 .input-group input:focus {
-    border-color: #007BFF;
+    border-color: #233142;
 }
 
 .login-btn {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #233142;
     border: none;
     border-radius: 5px;
     color: white;
@@ -68,7 +68,7 @@ h2 {
 }
 
 .login-btn:hover {
-    background-color: #0056b3;
+    background-color: #233142;
 }
 
 .message {
@@ -78,10 +78,117 @@ h2 {
 }
 
 .message a {
-    color: #007BFF;
+    color: #233142;
     text-decoration: none;
 }
 
 .message a:hover {
     text-decoration: underline;
+}
+
+/* 마스코트 고정 배치 */
+.floating-mascot {
+    position: fixed; /* 항상 화면에 고정 */
+    bottom: 20px; /* 페이지 하단에서 20px */
+    right: 30px; /* 페이지 오른쪽에서 20px */
+    z-index: 1000; /* 다른 요소보다 위에 위치 */
+}
+
+.mascot-img {
+    max-width: 200px; /* 마스코트 크기 조정 */
+    height: auto;
+    opacity: 0.9; /* 기본 투명도 */
+    transition: opacity 0.3s, transform 0.3s; /* 마우스 효과 */
+    cursor: pointer;
+}
+
+.mascot-img:hover {
+    opacity: 1; /* 마우스 오버 시 투명도 제거 */
+    transform: scale(1.1); /* 약간 확대 */
+}
+
+/* 배경 그래디언트 */
+body {
+    background: linear-gradient(135deg, #233142, #045dc2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 어두운 투명도 */
+    z-index: -1; /* 뒤로 보냄 */
+}
+
+/* 로그인 박스 */
+.login-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    color: #333;
+}
+
+/* 텍스트 필드와 아이콘 */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper .icon-user,
+.input-wrapper .icon-lock {
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+    color: #aaa;
+}
+
+.input-wrapper input {
+    padding-left: 35px; /* 아이콘 공간 확보 */
+}
+
+.input-group input {
+    transition: box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 5px rgba(79, 157, 166, 0.8);
+}
+
+/* 추가 링크 */
+.additional-links {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.additional-links a {
+    color: #4F9DA6;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.additional-links a:hover {
+    text-decoration: underline;
+}
+
+/* 마스코트 */
+.mascot-img {
+    animation: mascot-float 2s infinite ease-in-out; /* 마스코트 애니메이션 */
+}
+
+@keyframes mascot-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }

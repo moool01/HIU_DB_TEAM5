@@ -3,7 +3,7 @@
 {% block content %}
 <div class="search-container">
     <h2>강의 및 교수 검색</h2>
-    <form action="{{ url_for('search_page') }}" method="POST" class="search-form">
+    <form action="{{ url_for('search_main') }}" method="POST" class="search-form">
         <input type="text" name="query" placeholder="강의명 또는 교수명 입력" value="{{ query }}" class="search-input">
         <button type="submit" class="search-button">검색</button>
     </form>

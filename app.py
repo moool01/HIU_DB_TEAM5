@@ -62,6 +62,8 @@ def login():
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login'))
+        
+        return render_template('login.html')
 
 @app.route('/my_evaluations')
 def my_evaluations():
@@ -269,6 +271,41 @@ def search():
     ]
 
     return render_template('search_page.html', results=results, student=student)
+
+@app.route('/help')
+def help():
+    student_id = session.get('student_id')
+    student = Student.query.get(student_id) if student_id else None
+    return render_template('help.html', student=student)
+
+@app.route('/search_main', methods=['GET', 'POST'])
+def search_main():
+    query = request.form.get('query', '').strip()  # 폼 데이터에서 검색어 가져오기
+    student_id = session.get('student_id')
+    student = Student.query.get(student_id) if student_id else None
+
+    results = []
+    if query:
+        # 강의 및 교수 검색
+        lectures = (
+            db.session.query(Lecture, Professor)
+            .join(Professor_lecture, Professor_lecture.c.lecture_id == Lecture.id)
+            .join(Professor, Professor_lecture.c.professor_id == Professor.id)
+            .filter(
+                Lecture.title.ilike(f"%{query}%") |
+                Professor.name.ilike(f"%{query}%")
+            )
+            .distinct()
+            .all()
+        )
+
+        results = [
+            {"lecture": lecture, "professor": professor}
+            for lecture, professor in lectures
+        ]
+
+    return render_template('search_main.html', query=query, results=results, student=student)
+
 
 if __name__ == '__main__':
     with app.app_context():

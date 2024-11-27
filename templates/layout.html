@@ -7,30 +7,48 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <header>
+    <header class="custom-header">
         <div class="header-container">
-            <h1>{{ g.student.name if g.student else "강의 평가 시스템" }} 학생의 강의 평가 시스템</h1>
-            <form action="{{ url_for('search') }}" method="POST">
-                <input type="text" name="query" placeholder="강의명 또는 교수명 검색">
-                <button type="submit">검색</button>
-            </form>
-            <div class="nav-buttons">
-                <a href="{{ url_for('evaluate') }}">
-                    <button type="button">홈으로 돌아가기</button>
-                </a>
-                <a href="{{ url_for('my_evaluations') }}">
-                    <button type="button">내 평가 보기</button>
-                </a>
+            <div class="header-logo">
+                <img src="{{ url_for('static', filename='img-logo.png') }}" alt="로고" class="logo-img">
             </div>
+            <div class="header-content">
+                <h1>{{ g.student.name if g.student else "강의 평가 시스템" }} 학생의 강의 평가 시스템</h1>
+            </div>
+            <form action="{{ url_for('search_main') }}" method="POST" class="search-form">
+                <input type="text" name="query" placeholder="강의명 또는 교수명 검색" class="search-input">
+                <button type="submit" class="search-button">검색</button>
+            </form>
         </div>
     </header>
     
+    
+    <div class="main-layout">
+        <!-- 왼쪽 사이드바 추가 -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{{ url_for('evaluate') }}">Home</a></li>
+                    <li><a href="{{ url_for('my_evaluations') }}">My Page</a></li>
+                    <li><a href="{{ url_for('search_main') }}">Search Page</a></li>
+                    <li><a href="{{ url_for('help') }}">Help</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        
+        
+
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>© 2024 강의 평가 시스템</p>
-    </footer>
+    
+    <!-- 마스코트 이미지 -->
+    <div class="floating-mascot">
+        <a href="{{ url_for('login') }}">
+            <img src="{{ url_for('static', filename='img-mascot.png') }}" alt="마스코트" class="mascot-img">
+        </a>
+    </div>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
