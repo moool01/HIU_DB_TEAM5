@@ -1,0 +1,64 @@
+<!-- {% extends 'layout.html' %} -->
+
+{% block content %}
+<div class="background-container">
+    <!-- 좌측 화살표 버튼 -->
+    <button class="arrow-left" id="prev-button">←</button>
+    
+    <!-- 우측 화살표 버튼 -->
+    <button class="arrow-right" id="next-button">→</button>
+
+    <!-- 기존 내용은 그대로 유지 -->
+    <header>
+        <div class="menu-icon" id="menu-toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <!-- 로고 이미지 삽입 -->
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="홍익대학교 공식 로고">
+        </div>
+        <!-- 로그인 버튼 -->
+        <button class="login-button" id="login-button">
+            <img src="{{ url_for('static', filename='login.png') }}" alt="로그인 버튼">
+        </button>
+    </header>
+    
+    <!-- 왼쪽에서 세로로 펼쳐지는 메뉴 -->
+    <nav id="sidebar-menu" class="hidden">
+        <ul>
+            <li>
+                <button class="menu-item">
+                    <img src="{{ url_for('static', filename='search.png') }}" alt="강의/교수님 검색">
+                    <span>강의/교수님 검색</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item">
+                    <img src="{{ url_for('static', filename='evaluation.png') }}" alt="강의 평가 작성">
+                    <span>강의 평가 작성</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item">
+                    <img src="{{ url_for('static', filename='review.png') }}" alt="나의 평가 보기">
+                    <span>나의 평가 보기</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item">
+                    <img src="{{ url_for('static', filename='help.png') }}" alt="도움말">
+                    <span>도움말</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="welcome-text">강의평가 시스템<br>REVIEW SYSTEM</div>
+
+    <main>
+        <!-- 메인화면 내용 -->
+    </main>
+</div>
+{% endblock %}

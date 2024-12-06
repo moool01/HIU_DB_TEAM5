@@ -47,10 +47,9 @@ def add_student_to_template():
     else:
         g.student = None
 
-
 @app.route('/')
 def home():
-    return redirect(url_for('login2'))
+    return render_template('mainpage.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -24,9 +24,8 @@
         </div>
     </header>
     
-    
     <div class="main-layout">
-        <!-- 왼쪽 사이드바 추가 -->
+        <!-- 왼쪽 사이드바 -->
         <aside class="sidebar">
             <nav class="sidebar-nav">
                 <ul>
@@ -38,12 +37,11 @@
             </nav>
         </aside>
 
-        
-        
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+        <!-- 콘텐츠 블록 -->
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
     
     <!-- 마스코트 이미지 -->
     <div class="floating-mascot">
