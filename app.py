@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request, redirect, url_for,session, g
+from flask import Flask, flash, render_template, request, redirect, url_for,session,g
 from models import db, Student, Professor, Lecture, Evaluation, Summary,Professor_lecture
 from forms import EvaluationForm
 import cx_Oracle,sys
@@ -22,8 +22,13 @@ elif sys.platform == "win32":  # Windows
         exit()
 
 else:
-    print("지원하지 않는 운영 체제입니다:", sys.platform)
-    exit()
+    try:
+        print("Oracle Instant Client 초기화 성공 (linux)")
+    except cx_Oracle.DatabaseError as e:
+        print("Oracle Instant Client 초기화 실패 (linux):", e)
+        exit()
+        print("지원하지 않는 운영 체제입니다:", sys.platform)
+        exit()
 
 # 이후 코드 작성
 app = Flask(__name__)
@@ -45,7 +50,7 @@ def add_student_to_template():
 
 @app.route('/')
 def home():
-    return redirect(url_for('login'))
+    return redirect(url_for('login2'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -64,7 +69,23 @@ def login():
             return redirect(url_for('login'))
         
         return render_template('login.html')
-
+@app.route('/login2', methods=['GET', 'POST'])
+def login2():
+    if request.method == 'GET':
+        return render_template('login2.html')
+    elif request.method == 'POST':
+        user_id = request.form['userID']
+        password = request.form['password']
+        user = Student.query.filter_by(id=int(user_id), password=password).first()
+        if user:
+            session['student_id'] = user.id  # 세션에 사용자 ID 저장
+            flash('로그인 성공!', 'success')
+            return redirect(url_for('evaluate'))
+        else:
+            flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
+            return redirect(url_for('login2'))
+        
+        return render_template('login.html')
 @app.route('/my_evaluations')
 def my_evaluations():
     student_id = session.get('student_id')

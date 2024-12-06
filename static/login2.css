@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url('login.png') no-repeat center center fixed;
+    background-size: 100% 100%;
+    padding-left: 25%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.login-form {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button {
+    padding: 10px;
+    background-color: #001ba6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.side-content {
+    width: 250px;
+    height: 350px;
+    margin-left: 180px;
+    margin-top: 60px;
+    background-color: white;
+    background-image: url('img-mascot.png');
+    background-repeat: no-repeat;
+    background-position : 50% 30%;
+    background-size: 70%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.text-box {
+    width: 90%;
+    height: 150px;
+    color:gray;
+    font-size: small;
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 350px;
+    margin-left: 30px;
+}
+
+.header-image {
+    position: absolute;
+    top: 80px;
+    left: 240px; /* 우측 위치 조정 */
+    width: 100px;
+    height: auto;
+}
