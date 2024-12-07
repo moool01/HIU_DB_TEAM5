@@ -683,6 +683,11 @@ header {
     transform: scale(1.1); /* 약간 확대 */
 }
 
+main {
+    margin-top: 65px; /* 헤더 높이만큼 여백 추가 */
+    padding: 20px; /* 콘텐츠 여백 */
+}
+
 /* 부모 컨테이너 */
 .main-layout {
     display: flex;
@@ -1080,4 +1085,19 @@ padding: 5px;
 height: 30px;
 width: 30px;
 object-fit: contain;
+}
+
+footer {
+    background-color: transparent; 
+    color: black; 
+    text-align: center; 
+    padding: 10px 0; 
+    font-size: 0.9rem; 
+    position: relative; 
+    bottom: 0; 
+    width: 100%;
+}
+
+.footer-content {
+    margin: 0 auto;
 }
