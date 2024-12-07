@@ -214,6 +214,14 @@ header {
     justify-content: center;
 }
 
+.header-center {
+    position: absolute; /* 다른 요소의 흐름과 독립 */
+    top: 50%; /* 헤더 높이의 50% */
+    left: 50%; /* 헤더 너비의 50% */
+    transform: translate(-50%, -50%); /* 정중앙으로 이동 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
 /* 헤더 제목 */
 .header-content h1 {
     font-size: 2rem;
@@ -576,13 +584,6 @@ header {
     height: 50px; /* 헤더 높이 명시 */
 }
 
-/* 로고 영역 (수직 가운데 정렬) */
-.header-logo {
-    position: absolute;
-    top: 50%; /* 헤더의 수직 중앙 */
-    left: 40px; /* 헤더 왼쪽에서 40px 여백 */
-    transform: translateY(-50%); /* 수직 중앙 정렬 */
-}
 
 /* 로고 이미지 */
 .logo-img {
@@ -689,37 +690,50 @@ header {
     min-height: 100vh;
     background-color: #f8f9fa;
 }
-
-.menu-icon {
+ /*햄버거메뉴와 홍익로고*/
+.header-left { 
     display: flex;
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
-
+    align-items: center; /* 수평 중앙 정렬 */
+    gap: 20px;  /* 로고와 햄버거 메뉴 사이 간격 */
     /* 햄버거 위치조정 */
-    margin-left: -20px; /* 또는 */
+    margin-left: -58%; /* 또는 */
     position: relative;
-    left: -20px;
+    left: -20%;
   }
+.header-left .line {
+width: 25px;
+height: 3px;
+background-color: black;
+transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
   
-  .menu-icon .line {
-    width: 25px;
-    height: 3px;
-    background-color: black;
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  }
+.header-left.active .line:nth-child(1) {
+transform: rotate(45deg) translateY(8px);
+}
   
-  .menu-icon.active .line:nth-child(1) {
-    transform: rotate(45deg) translateY(8px);
-  }
-  
-  .menu-icon.active .line:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .menu-icon.active .line:nth-child(3) {
-    transform: rotate(-45deg) translateY(-8px);
-  }
+.header-left.active .line:nth-child(2) {
+opacity: 0;
+}
+
+.header-left.active .line:nth-child(3) {
+transform: rotate(-45deg) translateY(-8px);
+}
+
+/* 로고 영역 (수직 가운데 정렬) */
+.header-logo {
+    position: absolute;
+    top : 35%;
+  /*헤더의 수직 중앙 */
+    left: 400%; /* 헤더 왼쪽에서 40px 여백 */
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    transform: scale(3); /* 크기 */
+    transform-origin: center; /* 크기 조정 기준점 설정 */
+    align-items: center; /* 수평 중앙 정렬 */
+}
+
 
 /* 왼쪽 메뉴바 스타일 */
 nav#sidebar-menu {
@@ -973,4 +987,70 @@ main {
     .navigation-list li {
         padding: 0.8rem;
     }
+}
+/* 햄버거 메뉴 아이콘 */
+.menu-icon {
+    display: flex;
+    top:50%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;  /* 고정 높이 */
+    width: 30px;   /* 고정 너비 */
+    cursor: pointer;
+    transform: scale(1);  /* 크기 확대 */
+    transform-origin: center; /* 중심 기준 크기 조정 */
+}
+
+/* 햄버거 메뉴 막대 */
+.menu-icon .line {
+    width: 100%;         /* 막대 너비 */
+    height: 4px;         /* 막대 높이 */
+    background-color: black;  /* 막대 색상 */
+    border-radius: 2px;   /* 부드러운 모서리 */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* 클릭 시 애니메이션 */
+.menu-icon.active .line:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+
+.menu-icon.active .line:nth-child(2) {
+    opacity: 0;  /* 가운데 막대 사라짐 */
+}
+
+.menu-icon.active .line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+.header-login{
+margin-right: -5500%; /* 또는 */
+position: relative;
+right: -10%;
+}
+
+.logout-button {
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+}
+
+.logout-button img {
+height: 30px;
+width: 30px;
+object-fit: contain;
+}
+
+.login-button {
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+}
+
+.login-button img {
+height: 30px;
+width: 30px;
+object-fit: contain;
 }

@@ -18,28 +18,35 @@
                 </div>
                 <div class="header-logo">
                     <a href="{{ url_for('homepage') }}">
-                        <img src="{{ url_for('static', filename='logo-blue.png') }}" alt="로고" class="logo-img">
+                        <img src="{{ url_for('static', filename='logo-white.png') }}" alt="로고" class="logo-img">
                     </a>
                 </div>
             </div>
     
             <!-- 가운데: 학생 정보 텍스트 -->
             <div class="header-center">
-                <h1>{{ g.student.name if g.student else "강의 평가 시스템" }} 학생의 강의 평가 시스템</h1>
+                <h1>{{ g.student.name+' 학생의 ' if g.student else "" }}강의 평가 시스템</h1>
             </div>
     
-            <!-- 오른쪽: 로그인 버튼 -->
+
             <div class="header-right">
-<!-- 
-                {% if session.get('student_id') %}
-                    <a href="{{ url_for('logout') }}" class="btn btn-danger" aria-label="로그아웃">로그아웃</a>
-                {% else %}
-                    <img src="{{ url_for('static', filename='login2.png') }}" alt="로그인 아이콘">
-                {% endif %} -->
                 <form action="{{ url_for('search_main') }}" method="POST" class="search-form">
                     <input type="text" name="query" placeholder="강의명 또는 교수명 검색" class="search-input">
                     <button type="submit" class="search-button">검색</button>
                 </form>
+                <div class="header-login">
+                    {% if session.get('student_id') %}
+                    <!-- 로그아웃 버튼 (이미지) -->
+                    <a href="{{ url_for('logout') }}" class="logout-button" aria-label="로그아웃">
+                        <img src="{{ url_for('static', filename='logout-white.png') }}" alt="로그아웃 아이콘">
+                    </a>
+                    {% else %}
+                    <!-- 로그인 버튼 (텍스트) -->
+                    <a href="{{ url_for('login2') }}" class="login-button" aria-label="로그인">
+                      <img src="{{ url_for('static', filename='login-white.png') }}" alt="로그인 아이콘">
+                    </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </header>

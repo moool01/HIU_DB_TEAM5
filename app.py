@@ -94,8 +94,14 @@ def homepage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # GET 요청 처리
     if request.method == 'GET':
+        # 'next' 파라미터를 가져오고 없으면 홈으로 설정
+        next_url = request.args.get('next', url_for('homepage'))
+        session['next_url'] = next_url  # 세션에 저장
         return render_template('login.html')
+    
+    # POST 요청 처리
     elif request.method == 'POST':
         user_id = request.form['userID']
         password = request.form['password']
@@ -103,12 +109,12 @@ def login():
         if user:
             session['student_id'] = user.id  # 세션에 사용자 ID 저장
             flash('로그인 성공!', 'success')
-            return redirect(url_for('evaluate'))
+            # 이전 URL로 리다이렉트 (없으면 홈으로)
+            return redirect(session.pop('next_url', url_for('homepage')))
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login'))
-        
-        return render_template('login.html')
+    
 @app.route('/login2', methods=['GET', 'POST'])
 def login2():
     if request.method == 'GET':
@@ -120,7 +126,7 @@ def login2():
         if user:
             session['student_id'] = user.id  # 세션에 사용자 ID 저장
             flash('로그인 성공!', 'success')
-            return redirect(url_for('evaluate'))
+            return redirect(url_for('homepage'))
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login2'))

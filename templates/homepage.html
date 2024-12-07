@@ -26,14 +26,19 @@
       <img src="{{ url_for('static', filename='logo-blue.png') }}" alt="홍익대학교 공식 로고">
     </div>
 
-    <!-- 로그인 버튼 -->
-    <button class="login-button" id="login-button" aria-label="로그인">
+    <div class="header-login">
       {% if session.get('student_id') %}
-      <a href="{{ url_for('logout') }}" class="btn btn-danger" aria-label="로그아웃">로그아웃</a>
+      <!-- 로그아웃 버튼 (이미지) -->
+      <a href="{{ url_for('logout') }}" class="logout-button" aria-label="로그아웃">
+          <img src="{{ url_for('static', filename='logout-blue.png') }}" alt="로그아웃 아이콘">
+      </a>
       {% else %}
-      <img src="{{ url_for('static', filename='login2.png') }}" alt="로그인 아이콘">
+      <!-- 로그인 버튼 (텍스트) -->
+      <a href="{{ url_for('login2') }}" class="login-button" aria-label="로그인">
+        <img src="{{ url_for('static', filename='login-blue.png') }}" alt="로그인 아이콘">
+      </a>
       {% endif %}
-    </button>
+  </div>
   </header>
 
   <!-- 왼쪽 사이드바 -->

@@ -109,6 +109,19 @@ header {
   object-fit: contain;
 }
 
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.logout-button img {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
+
 .login-button {
   background: none;
   border: none;
@@ -121,7 +134,6 @@ header {
   width: 30px;
   object-fit: contain;
 }
-
 /* 왼쪽 메뉴바 스타일 */
 nav#sidebar-menu {
   position: fixed;
