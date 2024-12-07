@@ -75,7 +75,7 @@ function showFlashMessage(message, category) {
   flashMessage.innerHTML = `
       <span>${message}</span>
       <button class="close-btn" onclick="this.parentElement.remove();">×</button>
-  `;
+      `;
 
   // 컨테이너에 메시지 추가
   container.appendChild(flashMessage);

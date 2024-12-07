@@ -46,7 +46,12 @@ def add_student_to_template():
         g.student = student  # g는 Flask의 전역 객체
     else:
         g.student = None
-
+        
+    g.login_url = url_for('login2')
+    g.search_url = url_for('search_main')
+    g.evaluate_url = url_for('evaluate')
+    g.my_evaluations_url = url_for('my_evaluations')
+    g.help_url = url_for('help')
 
 @app.route('/')
 def home():
@@ -133,7 +138,6 @@ def my_evaluations():
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
         return redirect(url_for('login2'))
-
     student = Student.query.get(student_id)  # 현재 로그인한 사용자 정보 가져오기
     evaluations = Evaluation.query.filter_by(student_id=student_id).all()
     return render_template('evaluation_list.html', evaluations=evaluations, student=student)
