@@ -34,19 +34,28 @@
                     <input type="text" name="query" placeholder="강의명 또는 교수명 검색" class="search-input">
                     <button type="submit" class="search-button">검색</button>
                 </form>
+
+
+
+
+                <!-- 주석처리바람
                 <div class="header-login">
                     {% if session.get('student_id') %}
-                    <!-- 로그아웃 버튼 (이미지) -->
+
                     <a href="{{ url_for('logout') }}" class="logout-button" aria-label="로그아웃">
                         <img src="{{ url_for('static', filename='logout-white.png') }}" alt="로그아웃 아이콘">
                     </a>
                     {% else %}
-                    <!-- 로그인 버튼 (텍스트) -->
+
                     <a href="{{ url_for('login2') }}" class="login-button" aria-label="로그인">
                       <img src="{{ url_for('static', filename='login-white.png') }}" alt="로그인 아이콘">
                     </a>
                     {% endif %}
-                </div>
+                </div> -->
+
+
+
+
             </div>
         </div>
     </header>
@@ -58,7 +67,18 @@
       <li><a href="{{ g.evaluate_url }}" class="menu-item"><span>강의 평가 작성</span></a></li>
       <li><a href="{{ g.my_evaluations_url }}" class="menu-item"><span>나의 평가 보기</span></a></li>
       <li><a href="{{ g.help_url }}" class="menu-item"><span>도움말</span></a></li>
-    </ul>    
+    </ul>   
+
+    <div class="logout-button">
+        {% if session.get('student_id') %}
+        <!-- 로그아웃 버튼 -->
+        <a href="{{ url_for('logout') }}" id="logout-button" class="menu-item logout-button" aria-label="로그아웃">
+            <span>로그아웃</span>
+        </a>
+        {% endif %}
+    </div>
+</ul>
+</nav> 
     
   </nav>
 

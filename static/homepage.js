@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let backgroundRotationInterval = setInterval(() => {
     currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
     changeBackground();
-  }, 10000);
+  }, 3000);
 
   // 배경 버튼 클릭 이벤트
   prevButton.addEventListener('click', () => {

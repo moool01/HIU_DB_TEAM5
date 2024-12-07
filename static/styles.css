@@ -748,6 +748,7 @@ nav#sidebar-menu {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease-in-out;
     z-index: 100;
+    
   }
   
   nav#sidebar-menu ul {
@@ -800,6 +801,27 @@ main {
     flex-grow: 1;
     padding: 20px;
     background-color: white;
+}
+
+#logout-button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 18px;
+    text-align: left;
+    padding: 10px 0 10px 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: underline;
+}
+
+#logout-button:hover {
+    background-color: #FF6347; /* Hover 시 로그아웃 버튼 강조 (토마토 색상) */
+    color: white;
 }
 
 /* 푸터 섹션 */
@@ -1023,11 +1045,16 @@ main {
     transform: rotate(-45deg) translateY(-8px);
 }
 
-.header-login{
-margin-right: -5500%; /* 또는 */
-position: relative;
-right: -10%;
+.header-right {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
 }
+/* 
+.header-login {
+    margin-right: 0; /* 고정된 margin 값 제거 
+    position: static; /* 부모 컨테이너의 정렬에 따라 위치 결정 
+} */
 
 .logout-button {
 background: none;

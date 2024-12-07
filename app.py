@@ -138,6 +138,7 @@ def logout():
     session.clear()  # 세션 초기화
     flash("로그아웃이 완료되었습니다.", "success")
     return redirect(url_for('home'))
+
 @app.route('/my_evaluations')
 def my_evaluations():
     student_id = session.get('student_id')
