@@ -9,48 +9,65 @@
 <body>
     <header class="custom-header">
         <div class="header-container">
-            <div class="header-logo">
-                <a href="{{ url_for('evaluate') }}">
-                    <img src="{{ url_for('static', filename='img-logo.png') }}" alt="로고" class="logo-img">
-                </a>
+            <!-- 왼쪽: 햄버거 메뉴와 로고 -->
+            <div class="header-left">
+                <div class="menu-icon" id="menu-toggle" aria-label="메뉴 열기">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="header-logo">
+                    <a href="{{ url_for('homepage') }}">
+                        <img src="{{ url_for('static', filename='logo-white.png') }}" alt="로고" class="logo-img">
+                    </a>
+                </div>
             </div>
-            <div class="header-content">
+    
+            <!-- 가운데: 학생 정보 텍스트 -->
+            <div class="header-center">
                 <h1>{{ g.student.name if g.student else "강의 평가 시스템" }} 학생의 강의 평가 시스템</h1>
             </div>
-            <form action="{{ url_for('search_main') }}" method="POST" class="search-form">
-                <input type="text" name="query" placeholder="강의명 또는 교수명 검색" class="search-input">
-                <button type="submit" class="search-button">검색</button>
-            </form>
+    
+            <!-- 오른쪽: 검색 폼 -->
+            <div class="header-right">
+                <form action="{{ url_for('search_main') }}" method="POST" class="search-form">
+                    <input type="text" name="query" placeholder="강의명 또는 교수명 검색" class="search-input">
+                    <button type="submit" class="search-button">검색</button>
+                </form>
+            </div>
         </div>
     </header>
     
-    
-    <div class="main-layout">
-        <!-- 왼쪽 사이드바 추가 -->
-        <aside class="sidebar">
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="{{ url_for('evaluate') }}">Home</a></li>
-                    <li><a href="{{ url_for('my_evaluations') }}">My Page</a></li>
-                    <li><a href="{{ url_for('search_main') }}">Search Page</a></li>
-                    <li><a href="{{ url_for('help') }}">Help</a></li>
-                </ul>
-            </nav>
-        </aside>
+    <!-- 왼쪽에서 세로로 펼쳐지는 메뉴 -->
+<!-- 기존 메뉴바
+    <nav id="sidebar-menu" class="hidden">
+        <ul>
+            <li><button class="menu-item"><img src="{{ url_for('static', filename='search.png') }}" alt="강의/교수님 검색"><span>강의/교수님 검색</span></button></li>
+            <li><button class="menu-item"><img src="{{ url_for('static', filename='evaluation.png') }}" alt="강의 평가 작성"><span>강의 평가 작성</span></button></li>
+            <li><button class="menu-item"><img src="{{ url_for('static', filename='review.png') }}" alt="나의 평가 보기"><span>나의 평가 보기</span></button></li>
+            <li><button class="menu-item"><img src="{{ url_for('static', filename='help.png') }}" alt="도움말"><span>도움말</span></button></li> 
 
-        
-        
-
+-->
+  <nav id="sidebar-menu" class="hidden" aria-label="사이드바 메뉴">
+    <ul>
+      <li><a href="{{ search_url }}" class="menu-item"><span>강의/교수님 검색</span></a></li>
+      <li><a href="{{ evaluate_url }}" class="menu-item"><span>강의 평가 작성</span></a></li>
+      <li><a href="{{ my_evaluations_url }}" class="menu-item"><span>나의 평가 보기</span></a></li>
+      <li><a href="{{ help_url }}" class="menu-item"><span>도움말</span></a></li>
+    </ul>    
+  </nav>
+    <!-- 메인 컨텐츠 영역 -->
     <main>
         {% block content %}{% endblock %}
     </main>
-    
+
     <!-- 마스코트 이미지 -->
     <div class="floating-mascot">
-        <a href="{{ url_for('login') }}">
+        <a href="{{ url_for('login2') }}">
             <img src="{{ url_for('static', filename='img-mascot.png') }}" alt="마스코트" class="mascot-img">
         </a>
     </div>
+
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

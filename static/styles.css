@@ -929,3 +929,26 @@ main {
         padding: 0.8rem;
     }
 }
+/* 왼쪽 메뉴바 스타일 */
+nav#sidebar-menu {
+    position: fixed;
+    top: 65px; /* 헤더 바로 아래 */
+    left: -300px; /* 기본적으로 화면 밖으로 숨김 */
+    height: calc(100% - 60px); /* 헤더를 제외한 나머지 화면 높이 */
+    width: 250px;
+    background-color: white; /* 메뉴의 배경색 */
+    color: black;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+  }
+  
+  nav#sidebar-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav#sidebar-menu ul li {
+    margin-bottom: 20px;
+  }

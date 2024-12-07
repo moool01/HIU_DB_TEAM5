@@ -1,0 +1,316 @@
+/* 기본 스타일 초기화 */
+body, html, ul, li, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("background1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* 배경 이미지 변경을 위해 필요 */
+}
+
+/* 비율을 유지하면서 크기 키우기 */
+.logo img {
+  height: 100px;  /* 기존 크기보다 높이를 키우기 */
+  width: auto;    /* 가로 크기는 비율에 맞게 자동으로 조정 */
+  object-fit: contain;  /* 비율을 유지하면서 크기를 조정 */
+}
+
+
+
+/* 배경 이미지 컨테이너 */
+.background-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* 화살표 버튼 스타일 */
+.arrow-left, .arrow-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100;
+  transition: background-color 0.3s;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+/* 화살표 버튼 호버 효과 */
+.arrow-left:hover, .arrow-right:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 헤더 스타일 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 10;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.menu-icon .line {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.menu-icon.active .line:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.menu-icon.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.active .line:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+.logo {
+  flex: 1;
+  text-align: center;
+}
+
+.logo img {
+  height: 40px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.login-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.login-button img {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
+
+/* 왼쪽 메뉴바 스타일 */
+nav#sidebar-menu {
+  position: fixed;
+  top: 65px; /* 헤더 바로 아래 */
+  left: -300px; /* 기본적으로 화면 밖으로 숨김 */
+  height: calc(100% - 60px); /* 헤더를 제외한 나머지 화면 높이 */
+  width: 250px;
+  background-color: white; /* 메뉴의 배경색 */
+  color: black;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  z-index: 100;
+}
+
+nav#sidebar-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav#sidebar-menu ul li {
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  width: 100%;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 18px;
+  text-align: left;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item span {
+  font-size: 18px;
+}
+
+.menu-item img {
+  width: 20px; /* 이미지 크기 조정 */
+  height: 20px;
+  object-fit: contain;
+}
+
+/* 메뉴 hover 시 스타일 */
+.menu-item:hover {
+  background-color: #303f9f;
+  color: white;
+}
+
+/* 메뉴가 보일 때 */
+nav#sidebar-menu.visible {
+  left: 0;
+}
+
+/* 환영 텍스트 스타일 */
+.welcome-text {
+  position: absolute;
+  bottom: 5%;  
+  left: 10%;   
+  font-size: 50px;
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  /* 로고 크기 조정 */
+  .logo img {
+    height: 30px;
+  }
+
+  /* 메뉴 너비 조정 */
+  nav#sidebar-menu {
+    width: 200px;
+  }
+}
+/* 플래시 메시지 팝업 컨테이너 */
+.flash-popup-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.flash-popup {
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-out, fadeOut 3s 2s ease-out forwards;
+}
+
+.flash-popup.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.flash-popup.danger {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.flash-popup.warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.flash-popup .btn-close {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #000;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* 팝업 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .logo img {
+    height: 30px;
+  }
+
+  nav#sidebar-menu {
+    width: 200px;
+  }
+
+  .auth-buttons a {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .welcome-text {
+    font-size: 40px;
+  }
+}
+/* 로그인 및 로그아웃 버튼 스타일 */
+.auth-buttons a {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons a:hover {
+  background-color: #0056b3;
+}
+
+.auth-buttons .btn-danger {
+  background-color: #dc3545;
+}
+
+.auth-buttons .btn-danger:hover {
+  background-color: #b02a37;
+}

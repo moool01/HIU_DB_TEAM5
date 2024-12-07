@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홍익대학교 강의평가 시스템</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+</head>
+<body 
+  data-backgrounds='{{ backgrounds | tojson }}' 
+  data-login-url="{{ login_url }}"
+>
+  <!-- 플래시 메시지를 위한 컨테이너 -->
+  <div id="flash-message-container" class="flash-popup-container"></div>
+  <!-- 상단 헤더 -->
+  <header>
+    <!-- 햄버거 메뉴 -->
+    <div class="menu-icon" id="menu-toggle" aria-label="메뉴 열기">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+
+    <!-- 로고 -->
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo-blue.png') }}" alt="홍익대학교 공식 로고">
+    </div>
+
+    <!-- 로그인 버튼 -->
+    <button class="login-button" id="login-button" aria-label="로그인">
+      {% if session.get('student_id') %}
+      <a href="{{ url_for('logout') }}" class="btn btn-danger" aria-label="로그아웃">로그아웃</a>
+      {% else %}
+      <img src="{{ url_for('static', filename='login2.png') }}" alt="로그인 아이콘">
+      {% endif %}
+    </button>
+  </header>
+
+  <!-- 왼쪽 사이드바 -->
+  <nav id="sidebar-menu" class="hidden" aria-label="사이드바 메뉴">
+    <ul>
+      <li><a href="{{ search_url }}" class="menu-item"><span>강의/교수님 검색</span></a></li>
+      <li><a href="{{ evaluate_url }}" class="menu-item"><span>강의 평가 작성</span></a></li>
+      <li><a href="{{ my_evaluations_url }}" class="menu-item"><span>나의 평가 보기</span></a></li>
+      <li><a href="{{ help_url }}" class="menu-item"><span>도움말</span></a></li>
+    </ul>    
+    
+  </nav>
+
+   <!-- 배경 이미지 컨테이너 -->
+   <div class="background-container">
+    <button id="prev-button" class="arrow-left" aria-label="이전 배경">&lt;</button>
+    <button id="next-button" class="arrow-right" aria-label="다음 배경">&gt;</button>
+  </div>
+
+  <!-- 환영 텍스트 -->
+  <div class="welcome-text">
+    강의평가 시스템<br>REVIEW SYSTEM
+  </div>
+  <!-- Bootstrap 및 JS 파일 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='homepage.js') }}"></script>
+</body>
+</html> 
