@@ -47,7 +47,7 @@ def add_student_to_template():
     else:
         g.student = None
         
-    g.login_url = url_for('login2')
+    g.login_url = url_for('login')
     g.search_url = url_for('search_main')
     g.evaluate_url = url_for('evaluate')
     g.my_evaluations_url = url_for('my_evaluations')
@@ -70,7 +70,7 @@ def homepage():
     ]
 
     # 로그인 URL
-    login_url = url_for('login2')
+    login_url = url_for('login')
     
     # 메뉴바 URL
     search_url = url_for('search_main')
@@ -92,16 +92,33 @@ def homepage():
         student=student
     )
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     # GET 요청 처리
+#     if request.method == 'GET':
+#         # 'next' 파라미터를 가져오고 없으면 홈으로 설정
+#         next_url = request.args.get('next', url_for('homepage'))
+#         session['next_url'] = next_url  # 세션에 저장
+#         return render_template('login2.html')
+    
+#     # POST 요청 처리
+#     elif request.method == 'POST':
+#         user_id = request.form['userID']
+#         password = request.form['password']
+#         user = Student.query.filter_by(id=int(user_id), password=password).first()
+#         if user:
+#             session['student_id'] = user.id  # 세션에 사용자 ID 저장
+#             flash('로그인 성공!', 'success')
+#             # 이전 URL로 리다이렉트 (없으면 홈으로)
+#             return redirect(session.pop('next_url', url_for('homepage')))
+#         else:
+#             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
+#             return redirect(url_for('login2'))
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # GET 요청 처리
     if request.method == 'GET':
-        # 'next' 파라미터를 가져오고 없으면 홈으로 설정
-        next_url = request.args.get('next', url_for('homepage'))
-        session['next_url'] = next_url  # 세션에 저장
         return render_template('login.html')
-    
-    # POST 요청 처리
     elif request.method == 'POST':
         user_id = request.form['userID']
         password = request.form['password']
@@ -109,29 +126,12 @@ def login():
         if user:
             session['student_id'] = user.id  # 세션에 사용자 ID 저장
             flash('로그인 성공!', 'success')
-            # 이전 URL로 리다이렉트 (없으면 홈으로)
             return redirect(session.pop('next_url', url_for('homepage')))
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login'))
-    
-@app.route('/login2', methods=['GET', 'POST'])
-def login2():
-    if request.method == 'GET':
-        return render_template('login2.html')
-    elif request.method == 'POST':
-        user_id = request.form['userID']
-        password = request.form['password']
-        user = Student.query.filter_by(id=int(user_id), password=password).first()
-        if user:
-            session['student_id'] = user.id  # 세션에 사용자 ID 저장
-            flash('로그인 성공!', 'success')
-            return redirect(url_for('homepage'))
-        else:
-            flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
-            return redirect(url_for('login2'))
         
-        return render_template('login.html')
+    return render_template('login.html')
 # 로그아웃 라우트
 @app.route('/logout')
 def logout():
@@ -144,7 +144,7 @@ def my_evaluations():
     student_id = session.get('student_id')
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
-        return redirect(url_for('login2'))
+        return redirect(url_for('login'))
     student = Student.query.get(student_id)  # 현재 로그인한 사용자 정보 가져오기
     evaluations = Evaluation.query.filter_by(student_id=student_id).all()
     return render_template('evaluation_list.html', evaluations=evaluations, student=student)
@@ -154,7 +154,7 @@ def edit_evaluation(evaluation_id):
     student_id = session.get('student_id')
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
-        return redirect(url_for('login2'))
+        return redirect(url_for('login'))
 
     evaluation = Evaluation.query.get_or_404(evaluation_id)
     if evaluation.student_id != student_id:
@@ -182,7 +182,7 @@ def delete_evaluation(evaluation_id):
     student_id = session.get('student_id')
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
-        return redirect(url_for('login2'))
+        return redirect(url_for('login'))
 
     evaluation = Evaluation.query.get_or_404(evaluation_id)
     if evaluation.student_id != student_id:
@@ -201,7 +201,7 @@ def evaluate():
     student = Student.query.get(student_id)
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
-        return redirect(url_for('login2'))
+        return redirect(url_for('login'))
     if form.validate_on_submit():
         # 강의 및 교수 정보 처리
         lecture_title = form.lecture_title.data.strip()
