@@ -46,12 +46,75 @@ def add_student_to_template():
         g.student = student  # g는 Flask의 전역 객체
     else:
         g.student = None
-
+        
+    g.login_url = url_for('login')
+    g.search_url = url_for('search_main')
+    g.evaluate_url = url_for('evaluate')
+    g.my_evaluations_url = url_for('my_evaluations')
+    g.help_url = url_for('help')
 
 @app.route('/')
 def home():
-    return redirect(url_for('login2'))
+    return redirect(url_for('homepage'))
 
+@app.route('/homepage')
+def homepage():
+    student_id = session.get('student_id')
+    student = Student.query.get(student_id) if student_id else None
+
+    # Flask의 url_for를 사용해 정적 파일 경로를 동적으로 생성
+    background_images = [
+        url_for('static', filename='background1.png'),
+        url_for('static', filename='background2.png'),
+        url_for('static', filename='background3.png')
+    ]
+
+    # 로그인 URL
+    login_url = url_for('login')
+    
+    # 메뉴바 URL
+    search_url = url_for('search_main')
+    evaluate_url = url_for('evaluate')
+    my_evaluations_url = url_for('my_evaluations')
+    help_url = url_for('help')
+    
+    
+    
+    
+    return render_template(
+        'homepage.html',
+        backgrounds=background_images,
+        login_url=login_url,
+        search_url=search_url,
+        evaluate_url=evaluate_url,
+        my_evaluations_url=my_evaluations_url,
+        help_url=help_url,
+        student=student
+    )
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     # GET 요청 처리
+#     if request.method == 'GET':
+#         # 'next' 파라미터를 가져오고 없으면 홈으로 설정
+#         next_url = request.args.get('next', url_for('homepage'))
+#         session['next_url'] = next_url  # 세션에 저장
+#         return render_template('login2.html')
+    
+#     # POST 요청 처리
+#     elif request.method == 'POST':
+#         user_id = request.form['userID']
+#         password = request.form['password']
+#         user = Student.query.filter_by(id=int(user_id), password=password).first()
+#         if user:
+#             session['student_id'] = user.id  # 세션에 사용자 ID 저장
+#             flash('로그인 성공!', 'success')
+#             # 이전 URL로 리다이렉트 (없으면 홈으로)
+#             return redirect(session.pop('next_url', url_for('homepage')))
+#         else:
+#             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
+#             return redirect(url_for('login2'))
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -63,36 +126,25 @@ def login():
         if user:
             session['student_id'] = user.id  # 세션에 사용자 ID 저장
             flash('로그인 성공!', 'success')
-            return redirect(url_for('evaluate'))
+            return redirect(session.pop('next_url', url_for('homepage')))
         else:
             flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
             return redirect(url_for('login'))
         
-        return render_template('login.html')
-@app.route('/login2', methods=['GET', 'POST'])
-def login2():
-    if request.method == 'GET':
-        return render_template('login2.html')
-    elif request.method == 'POST':
-        user_id = request.form['userID']
-        password = request.form['password']
-        user = Student.query.filter_by(id=int(user_id), password=password).first()
-        if user:
-            session['student_id'] = user.id  # 세션에 사용자 ID 저장
-            flash('로그인 성공!', 'success')
-            return redirect(url_for('evaluate'))
-        else:
-            flash('로그인 실패: 아이디와 비밀번호를 확인하세요.', 'danger')
-            return redirect(url_for('login2'))
-        
-        return render_template('login.html')
+    return render_template('login.html')
+# 로그아웃 라우트
+@app.route('/logout')
+def logout():
+    session.clear()  # 세션 초기화
+    flash("로그아웃이 완료되었습니다.", "success")
+    return redirect(url_for('home'))
+
 @app.route('/my_evaluations')
 def my_evaluations():
     student_id = session.get('student_id')
     if not student_id:
         flash('로그인이 필요합니다.', 'danger')
         return redirect(url_for('login'))
-
     student = Student.query.get(student_id)  # 현재 로그인한 사용자 정보 가져오기
     evaluations = Evaluation.query.filter_by(student_id=student_id).all()
     return render_template('evaluation_list.html', evaluations=evaluations, student=student)
@@ -147,7 +199,9 @@ def evaluate():
     form = EvaluationForm()
     student_id = session.get('student_id')
     student = Student.query.get(student_id)
-
+    if not student_id:
+        flash('로그인이 필요합니다.', 'danger')
+        return redirect(url_for('login'))
     if form.validate_on_submit():
         # 강의 및 교수 정보 처리
         lecture_title = form.lecture_title.data.strip()
@@ -293,6 +347,7 @@ def search():
 
     return render_template('search_page.html', results=results, student=student)
 
+
 @app.route('/help')
 def help():
     student_id = session.get('student_id')
@@ -345,4 +400,4 @@ if __name__ == '__main__':
 
             db.session.add_all([professor1, professor2, lecture1, lecture2])
             db.session.commit()
-    app.run(debug=True)
+        app.run(debug=True, port=5001)

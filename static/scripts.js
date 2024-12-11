@@ -1,4 +1,6 @@
 // 강의 평가 폼 입력 검증
+const menuToggle = document.getElementById('menu-toggle');
+const sidebarMenu = document.getElementById('sidebar-menu');
 document.addEventListener("DOMContentLoaded", () => {
     const evaluationForm = document.querySelector("form");
 
@@ -76,6 +78,8 @@ document.querySelectorAll('.stars input').forEach((radio) => {
 document.addEventListener("DOMContentLoaded", () => {
     const stars = document.querySelectorAll(".stars input");
     const ratingValue = document.querySelector(".rating-value");
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebarMenu = document.getElementById('sidebar-menu');
 
     stars.forEach((star) => {
         star.addEventListener("change", (e) => {
@@ -83,5 +87,30 @@ document.addEventListener("DOMContentLoaded", () => {
             ratingValue.textContent = `${rating}/5`; // 올바른 점수로 업데이트
         });
     });
+
+  // 햄버거 메뉴 토글
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    sidebarMenu.classList.toggle('hidden');
+    sidebarMenu.classList.toggle('visible');
+  });
+
+  // 로그인 버튼 클릭 이벤트
+  const loginUrl = document.body.dataset.loginUrl;
+  loginButton.addEventListener('click', () => {
+    if (loginUrl) {
+      window.location.href = loginUrl;
+    }
+  });
+//메뉴 버튼 클릭 이벤트
+  document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', (event) => {
+      console.log(`${event.target.innerText} 메뉴를 클릭했습니다.`);
+    });
+  });
+});
 });
 

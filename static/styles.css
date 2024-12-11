@@ -214,6 +214,14 @@ header {
     justify-content: center;
 }
 
+.header-center {
+    position: absolute; /* 다른 요소의 흐름과 독립 */
+    top: 50%; /* 헤더 높이의 50% */
+    left: 50%; /* 헤더 너비의 50% */
+    transform: translate(-50%, -50%); /* 정중앙으로 이동 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
 /* 헤더 제목 */
 .header-content h1 {
     font-size: 2rem;
@@ -576,13 +584,6 @@ header {
     height: 50px; /* 헤더 높이 명시 */
 }
 
-/* 로고 영역 (수직 가운데 정렬) */
-.header-logo {
-    position: absolute;
-    top: 50%; /* 헤더의 수직 중앙 */
-    left: 40px; /* 헤더 왼쪽에서 40px 여백 */
-    transform: translateY(-50%); /* 수직 중앙 정렬 */
-}
 
 /* 로고 이미지 */
 .logo-img {
@@ -682,6 +683,11 @@ header {
     transform: scale(1.1); /* 약간 확대 */
 }
 
+main {
+    margin-top: 65px; /* 헤더 높이만큼 여백 추가 */
+    padding: 20px; /* 콘텐츠 여백 */
+}
+
 /* 부모 컨테이너 */
 .main-layout {
     display: flex;
@@ -689,58 +695,138 @@ header {
     min-height: 100vh;
     background-color: #f8f9fa;
 }
+ /*햄버거메뉴와 홍익로고*/
+.header-left { 
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    align-items: center; /* 수평 중앙 정렬 */
+    gap: 20px;  /* 로고와 햄버거 메뉴 사이 간격 */
+    /* 햄버거 위치조정 */
+    margin-left: -58%; /* 또는 */
+    position: relative;
+    left: -20%;
+  }
+.header-left .line {
+width: 25px;
+height: 3px;
+background-color: black;
+transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+  
+.header-left.active .line:nth-child(1) {
+transform: rotate(45deg) translateY(8px);
+}
+  
+.header-left.active .line:nth-child(2) {
+opacity: 0;
+}
 
-/* 사이드바 스타일 */
-.sidebar {
-    position: fixed; /* 항상 화면에 고정 */
-    top: 50%; /* 화면 중앙에 위치 */
+.header-left.active .line:nth-child(3) {
+transform: rotate(-45deg) translateY(-8px);
+}
+
+/* 로고 영역 (수직 가운데 정렬) */
+.header-logo {
+    position: absolute;
+    top : 35%;
+  /*헤더의 수직 중앙 */
+    left: 400%; /* 헤더 왼쪽에서 40px 여백 */
     transform: translateY(-50%); /* 수직 중앙 정렬 */
-    left: 0; /* 화면 왼쪽에 붙임 */
-    width: 200px; /* 사이드바 너비 */
-    max-height: calc(100vh - 40px); /* 화면 높이 - 여백 */
-    background: #ffffff; /* 흰색 배경 */
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    border-radius: 0 8px 8px 0; /* 오른쪽 모서리만 둥글게 */
-    overflow-y: auto; /* 내부 스크롤 활성화 */
-    z-index: 100; /* 다른 요소 위에 표시 */
-    transition: top 0.3s ease, transform 0.3s ease; /* 부드러운 움직임 */
-    padding: 15px; /* 내부 여백 */
+    transform: scale(3); /* 크기 */
+    transform-origin: center; /* 크기 조정 기준점 설정 */
+    align-items: center; /* 수평 중앙 정렬 */
 }
 
 
-/* 사이드바 링크 스타일 */
-.sidebar-nav {
-    list-style: none;
+/* 왼쪽 메뉴바 스타일 */
+nav#sidebar-menu {
+    position: fixed;
+    top: 65px; /* 헤더 바로 아래 */
+    left: -300px; /* 기본적으로 화면 밖으로 숨김 */
+    height: calc(100% - 60px); /* 헤더를 제외한 나머지 화면 높이 */
+    width: 250px;
+    background-color: white; /* 메뉴의 배경색 */
+    color: black;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+    
+  }
+  
+  nav#sidebar-menu ul {
+    list-style-type: none;
     padding: 0;
-    margin: 0;
-}
-
-.sidebar-nav li {
-    margin-bottom: 15px;
-}
-
-.sidebar-nav a {
-    display: block;
-    padding: 10px 15px;
-    border-radius: 6px;
-    color: #333;
-    text-decoration: none;
-    background: #f8f9fa; /* 밝은 배경 */
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.sidebar-nav a:hover {
-    background-color: #4F9DA6; /* 강조 색상 */
+  }
+  
+  nav#sidebar-menu ul li {
+    margin-bottom: 20px;
+  }
+  
+  .menu-item {
+    width: 100%;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 18px;
+    text-align: left;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .menu-item span {
+    font-size: 18px;
+  }
+  
+  .menu-item img {
+    width: 20px; /* 이미지 크기 조정 */
+    height: 20px;
+    object-fit: contain;
+  }
+  
+  /* 메뉴 hover 시 스타일 */
+  .menu-item:hover {
+    background-color: #303f9f;
     color: white;
-    transform: scale(1.05); /* 살짝 확대 */
-}
-
+  }
+  
+  /* 메뉴가 보일 때 */
+  nav#sidebar-menu.visible {
+    left: 0;
+  }
 
 /* 메인 콘텐츠 */
 main {
     flex-grow: 1;
     padding: 20px;
     background-color: white;
+}
+
+#logout-button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 18px;
+    text-align: left;
+    padding: 10px 0 10px 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: underline;
+}
+
+#logout-button:hover {
+    background-color: #FF6347; /* Hover 시 로그아웃 버튼 강조 (토마토 색상) */
+    color: white;
 }
 
 /* 푸터 섹션 */
@@ -928,4 +1014,90 @@ main {
     .navigation-list li {
         padding: 0.8rem;
     }
+}
+/* 햄버거 메뉴 아이콘 */
+.menu-icon {
+    display: flex;
+    top:50%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;  /* 고정 높이 */
+    width: 30px;   /* 고정 너비 */
+    cursor: pointer;
+    transform: scale(1);  /* 크기 확대 */
+    transform-origin: center; /* 중심 기준 크기 조정 */
+}
+
+/* 햄버거 메뉴 막대 */
+.menu-icon .line {
+    width: 100%;         /* 막대 너비 */
+    height: 4px;         /* 막대 높이 */
+    background-color: black;  /* 막대 색상 */
+    border-radius: 2px;   /* 부드러운 모서리 */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* 클릭 시 애니메이션 */
+.menu-icon.active .line:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+
+.menu-icon.active .line:nth-child(2) {
+    opacity: 0;  /* 가운데 막대 사라짐 */
+}
+
+.menu-icon.active .line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+/* 
+.header-login {
+    margin-right: 0; /* 고정된 margin 값 제거 
+    position: static; /* 부모 컨테이너의 정렬에 따라 위치 결정 
+} */
+
+.logout-button {
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+}
+
+.logout-button img {
+height: 30px;
+width: 30px;
+object-fit: contain;
+}
+
+.login-button {
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+}
+
+.login-button img {
+height: 30px;
+width: 30px;
+object-fit: contain;
+}
+
+footer {
+    background-color: transparent; 
+    color: black; 
+    text-align: center; 
+    padding: 10px 0; 
+    font-size: 0.9rem; 
+    position: relative; 
+    bottom: 0; 
+    width: 100%;
+}
+
+.footer-content {
+    margin: 0 auto;
 }
